@@ -1,9 +1,13 @@
 # zapland_web
 
-flutter build web --base-href /zapland_web/
+flutter build web --base-href /
 
 # check in local
 
-cd docs
-python -m http.server 888
-`access to http://localhost:8888/zapland_web/`
+cd build/web
+python -m http.server 8888
+`access to http://localhost:8888/`
+
+# Config
+
+flutter pub run flutter_launcher_icons:main

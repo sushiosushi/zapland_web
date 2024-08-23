@@ -23,11 +23,19 @@ dependencies:
   encrypt: ^5.0.3
   flutter_native_splash: ^2.4.1
   routemaster: ^1.0.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/icon/icon.png"
+    background_color: "#FFE000"
+    theme_color: "#3DFB92"
 
 flutter_native_splash:
   image: "assets/splash/splash.png"
@@ -38,8 +46,10 @@ flutter:
   generate: true
   assets:
     - env
+    - assets/icon/icon.png
     - assets/splash/
     - assets/roblox/
+    - assets/ogp/
 
   fonts:
     - family: CarterOne
