@@ -18,7 +18,7 @@ class MainPageState extends ConsumerState<MainPage> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => Routemaster.of(context)
-                .push(CodeCheckerPage.route + '?code=Test'),
+                .push('${CodeCheckerPage.route}?code=Test'),
             icon: const Icon(Icons.qr_code)),
         title: const Text('Free UGC Secret Code'),
       ),

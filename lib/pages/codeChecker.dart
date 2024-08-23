@@ -21,11 +21,13 @@ class CodeCheckerPageState extends ConsumerState<CodeCheckerPage> {
   }
 
   Widget build(BuildContext context) {
-    return Text(
-        ref
-            .read(secretCodeProvider.notifier)
-            .checkIfValid(widget.code!)
-            .toString(),
-        style: TextStyle(fontSize: 15.w));
+    return Scaffold(
+        body: Center(
+            child: Text(
+                ref
+                    .read(secretCodeProvider.notifier)
+                    .checkIfValid(widget.code!)
+                    .toString(),
+                style: TextStyle(fontSize: 15.w))));
   }
 }
