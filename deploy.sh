@@ -4,7 +4,7 @@
 webDeploy() {
   echo "🍏 Web build started" 
 
-  flutter build web --base-href /
+  flutter build web --base-href /$REPOSITORY_NAME/
 
   rm -rf docs/*
   rsync -av --remove-source-files build/web/ docs/
