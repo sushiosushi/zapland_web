@@ -11,7 +11,7 @@ import 'pages/mainPage.dart';
 
 Future<void> main() async {
   usePathUrlStrategy();
-  await dotenv.load(fileName: '.env');
+  await dotenv.load(fileName: 'env');
 
   runApp(const ProviderScope(child: MyApp()));
 }

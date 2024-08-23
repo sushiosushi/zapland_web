@@ -22751,7 +22751,7 @@ k=A.aQw(A.aq0(k.gbY(k)))
 $.Ve=!0
 $.UZ=new A.a7D(k,B.j_)
 s=2
-return A.a6($.aDz().v9(0,".env"),$async$amv)
+return A.a6($.aDz().v9(0,"env"),$async$amv)
 case 2:if($.ah==null)A.avM()
 k=$.ah
 k.toString
