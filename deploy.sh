@@ -6,6 +6,7 @@ webDeploy() {
 
   flutter build web --base-href /$REPOSITORY_NAME/
 
+  rm -rf docs/*
   rsync -av --remove-source-files build/web/ docs/
 
   git add .
