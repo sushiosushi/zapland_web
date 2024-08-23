@@ -1,0 +1,167 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gauge_indicator/gauge_indicator.dart';
+import 'package:sizer/sizer.dart';
+
+import '../helpers/codeGenerator.dart';
+import '../helpers/toast.dart';
+import '../helpers/urlLauncher.dart';
+
+class CodeGeneratorPage extends ConsumerStatefulWidget {
+  @override
+  CodeGeneratorPageState createState() => CodeGeneratorPageState();
+}
+
+class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Widget build(BuildContext context) {
+    final remainingSec = ref.watch(remainingSecProvider);
+    final secretCode = ref.watch(secretCodeProvider);
+
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Scaffold(
+        body: Center(
+      child: SingleChildScrollView(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          AnimatedRadialGauge(
+            duration: const Duration(seconds: 1),
+            curve: Curves.elasticOut,
+            radius: 25.w,
+            value: remainingSec.toDouble(),
+            axis: GaugeAxis(
+              min: 0,
+              max: MAX_SEC.toDouble(),
+              degrees: 300,
+              style: const GaugeAxisStyle(
+                background: Colors.transparent,
+                thickness: 20,
+                segmentSpacing: 4,
+              ),
+              progressBar: const GaugeProgressBar.rounded(
+                  // color: Color(0xFFB4C2F8),
+                  gradient: GaugeAxisGradient(colors: [
+                Color(0xFF3CFF8A),
+                Color(0xFF3CADFF),
+              ], colorStops: [
+                0.3,
+                0.7,
+              ])),
+              segments: [
+                GaugeSegment(
+                  from: 0,
+                  to: MAX_SEC.toDouble() / 3,
+                  color: Color(0xFFDFE2EC),
+                  cornerRadius: Radius.circular(10),
+                ),
+                GaugeSegment(
+                  from: MAX_SEC.toDouble() / 3,
+                  to: MAX_SEC.toDouble() / 3 * 2,
+                  color: Color(0xFFDFE2EC),
+                  cornerRadius: Radius.circular(10),
+                ),
+                GaugeSegment(
+                  from: MAX_SEC.toDouble() / 3 * 2,
+                  to: MAX_SEC.toDouble(),
+                  color: Color(0xFFDFE2EC),
+                  cornerRadius: Radius.circular(10),
+                ),
+              ],
+            ),
+            builder: (context, child, value) => Center(
+              child: Text(
+                remainingSec.toString(),
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 19.w,
+                ),
+                maxLines: 1,
+              ),
+            ),
+          ),
+          SizedBox(height: 10.w),
+          Text(
+            'SECRET CODE',
+            style: TextStyle(
+              fontSize: 5.w,
+            ),
+          ),
+          SizedBox(height: 2.w),
+          ElevatedButton.icon(
+              onPressed: () {
+                Clipboard.setData(ClipboardData(
+                  text: secretCode,
+                ));
+                showToastification(context, 'Copied to Clipboard');
+              },
+              style: ElevatedButton.styleFrom(
+                fixedSize: Size(70.w, 15.w),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.w),
+                ),
+              ),
+              icon: Icon(Icons.copy_rounded, size: 7.w),
+              label: Text(secretCode,
+                  style: TextStyle(
+                    fontSize: 7.w,
+                  ))),
+          Divider(
+            height: 10.h,
+            thickness: 2,
+            indent: 10.w,
+            endIndent: 10.w,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(3.w),
+                child: Material(
+                  child: Ink.image(
+                    width: 15.w,
+                    height: 15.w,
+                    image: const AssetImage('assets/roblox/icon.png'),
+                    child: InkWell(
+                        borderRadius: BorderRadius.circular(10),
+                        onTap: () => launchUrlFromWeb(Uri.parse(
+                            'https://www.roblox.com/games/16273429138/')),
+                        splashColor: const Color(0xff000000).withAlpha(30)),
+                  ),
+                ),
+              ),
+              SizedBox(width: 5.w),
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(3.w),
+                  child: Material(
+                      child: Ink.image(
+                    fit: BoxFit.fill,
+                    width: 36.w,
+                    height: 16.w,
+                    image:
+
+                        // get if darkmode or lightmode
+                        isDark
+                            ? const AssetImage('assets/roblox/badge_white.png')
+                            : const AssetImage('assets/roblox/badge_black.png'),
+                    child: InkWell(
+                        borderRadius: BorderRadius.circular(5),
+                        onTap: () => launchUrlFromWeb(Uri.parse(
+                            'https://www.roblox.com/games/16273429138/')),
+                        splashColor: const Color(0xff000000).withAlpha(30)),
+                  ))),
+            ],
+          ),
+        ],
+      )),
+    ));
+  }
+}
