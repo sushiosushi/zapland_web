@@ -11,6 +11,8 @@ import '../helpers/toast.dart';
 import '../helpers/urlLauncher.dart';
 
 class CodeGeneratorPage extends ConsumerStatefulWidget {
+  const CodeGeneratorPage({super.key});
+
   @override
   CodeGeneratorPageState createState() => CodeGeneratorPageState();
 }
