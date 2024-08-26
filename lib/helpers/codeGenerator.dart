@@ -94,7 +94,7 @@ class SecretCodeController extends StateNotifier<String> {
   }
 
   checkIfValid(String? code) {
-    print('code: $code state: $state');
+    // print('code: $code state: $state');
     return state == code;
   }
 }
