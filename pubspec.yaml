@@ -24,6 +24,7 @@ dependencies:
   flutter_native_splash: ^2.4.1
   routemaster: ^1.0.1
   flutter_launcher_icons: ^0.13.1
+  pointycastle: ^3.9.1
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,7 @@ flutter:
     - assets/splash/
     - assets/roblox/
     - assets/ogp/
+    - assets/test/
 
   fonts:
     - family: CarterOne

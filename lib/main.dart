@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -40,17 +42,15 @@ class MyAppState extends ConsumerState<MyApp> {
         themeMode: ThemeMode.system,
         routerDelegate: RoutemasterDelegate(
           routesBuilder: (context) => RouteMap(
-            routes: {
-              '/': (routeData) => const MaterialPage(child: MainPage()),
-              CodeCheckerPage.route: (routeData) => checkIfValidCode(ref,
-                  code: routeData.queryParameters['code']),
-              NotFoundPage.route: (routeData) =>
-                  const MaterialPage(child: NotFoundPage()),
-            },
-            // onUnknownRoute: (route) {
-            //   return const MaterialPage(child: NotFoundPage());
-            // },
-          ),
+              routes: {
+                '/': (routeData) => const MaterialPage(child: MainPage()),
+                CodeCheckerPage.route: (routeData) => checkIfValidCode(ref,
+                    code: routeData.queryParameters['code']),
+                // NotFoundPage.route: (routeData) =>
+                //     const MaterialPage(child: NotFoundPage()),
+              },
+              onUnknownRoute: (route) =>
+                  const MaterialPage(child: NotFoundPage())),
         ),
         routeInformationParser: const RoutemasterParser(),
       );

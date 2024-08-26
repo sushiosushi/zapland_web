@@ -22,7 +22,7 @@ class MainPageState extends ConsumerState<MainPage> {
             icon: const Icon(Icons.qr_code)),
         title: const Text('Free UGC Secret Code'),
       ),
-      body: CodeGeneratorPage(),
+      body: const CodeGeneratorPage(),
     );
   }
 }
