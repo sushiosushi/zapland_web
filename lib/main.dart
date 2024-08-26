@@ -11,7 +11,7 @@ import 'pages/mainPage.dart';
 import 'pages/notFound.dart';
 
 Future<void> main() async {
-  // usePathUrlStrategy(); //TODO: Remove # from URL
+  usePathUrlStrategy(); //TODO: Remove # from URL
   await dotenv.load(fileName: 'env');
 
   runApp(const ProviderScope(child: MyApp()));
