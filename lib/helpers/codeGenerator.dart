@@ -66,7 +66,7 @@ class SecretCodeController extends StateNotifier<String> {
     state = secretCode;
   }
 
-  checkIfValid(String code) {
+  checkIfValid(String? code) {
     return state == code;
   }
 }

@@ -9,10 +9,9 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'helpers/theme.dart';
 import 'pages/mainPage.dart';
 import 'pages/notFound.dart';
-import 'pages/test.dart';
 
 Future<void> main() async {
-  // usePathUrlStrategy();
+  // usePathUrlStrategy(); //TODO: Remove # from URL
   await dotenv.load(fileName: 'env');
 
   runApp(const ProviderScope(child: MyApp()));
@@ -43,17 +42,17 @@ class MyAppState extends ConsumerState<MyApp> {
           routesBuilder: (context) => RouteMap(
             routes: {
               '/': (routeData) => const MaterialPage(child: MainPage()),
-              CodeCheckerPage.route: (routeData) => MaterialPage(
-                  child:
-                      CodeCheckerPage(code: routeData.queryParameters['code'])),
-              '/test': (routeData) => MaterialPage(child: TestPage()),
+              CodeCheckerPage.route: (routeData) => checkIfValidCode(ref,
+                  code: routeData.queryParameters['code']),
+              NotFoundPage.route: (routeData) =>
+                  const MaterialPage(child: NotFoundPage()),
             },
-            onUnknownRoute: (route) {
-              return MaterialPage(child: NotFoundPage());
-            },
+            // onUnknownRoute: (route) {
+            //   return const MaterialPage(child: NotFoundPage());
+            // },
           ),
         ),
-        routeInformationParser: RoutemasterParser(),
+        routeInformationParser: const RoutemasterParser(),
       );
     });
   }

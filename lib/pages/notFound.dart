@@ -5,10 +5,9 @@ import 'package:sizer/sizer.dart';
 import '../helpers/codeGenerator.dart';
 
 class NotFoundPage extends ConsumerStatefulWidget {
-  final String? code;
-  NotFoundPage({this.code});
-
   static const String route = '/404';
+
+  const NotFoundPage({super.key});
 
   @override
   NotFoundPageState createState() => NotFoundPageState();
