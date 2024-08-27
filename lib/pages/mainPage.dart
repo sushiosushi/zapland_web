@@ -16,10 +16,10 @@ class MainPageState extends ConsumerState<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () => Routemaster.of(context)
-                .push('${CodeCheckerPage.route}?code=Test'),
-            icon: const Icon(Icons.qr_code)),
+        // leading: IconButton(
+        //     onPressed: () => Routemaster.of(context)
+        //         .push('${CodeCheckerPage.route}?code=Test'),
+        //     icon: const Icon(Icons.qr_code)),
         title: const Text('Free UGC Secret Code'),
       ),
       body: const CodeGeneratorPage(),
