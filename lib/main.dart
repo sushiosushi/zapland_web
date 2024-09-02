@@ -9,6 +9,7 @@ import 'package:zapland_web/pages/codeChecker.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'helpers/theme.dart';
+import 'pages/checkUserAgentPage.dart';
 import 'pages/mainPage.dart';
 import 'pages/notFound.dart';
 
@@ -48,6 +49,8 @@ class MyAppState extends ConsumerState<MyApp> {
                     code: routeData.queryParameters['code']),
                 // NotFoundPage.route: (routeData) =>
                 //     const MaterialPage(child: NotFoundPage()),
+                CheckUserAgentPage.route: (routeData) =>
+                    const MaterialPage(child: CheckUserAgentPage()),
               },
               onUnknownRoute: (route) =>
                   const MaterialPage(child: NotFoundPage())),
