@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,11 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-        body: Center(
-      child: SingleChildScrollView(
-          child: Column(
+        body: SingleChildScrollView(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          SizedBox(height: 5.h),
           AnimatedRadialGauge(
             duration: const Duration(seconds: 1),
             curve: Curves.elasticOut,
@@ -96,14 +97,14 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
               ),
             ),
           ),
-          SizedBox(height: 10.w),
+          SizedBox(height: 3.h),
           Text(
             'SECRET CODE',
             style: TextStyle(
               fontSize: 5.w,
             ),
           ),
-          SizedBox(height: 2.w),
+          SizedBox(height: 1.h),
           isInZapshotWebView.when(
             data: (isInZapshot) => isInZapshot
                 ? ElevatedButton.icon(
@@ -141,14 +142,15 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         ),
                       ),
                       icon: Icon(Icons.copy_rounded, size: 7.w),
-                      label: Blur(
-                          blur: 0.9.w,
+                      label: ImageFiltered(
+                          imageFilter:
+                              ImageFilter.blur(sigmaX: 1.w, sigmaY: 1.w),
                           child: Text(fakeSecretCode,
                               style: TextStyle(
                                 fontSize: 7.w,
                               ))),
                     ),
-                    SizedBox(height: 2.w),
+                    SizedBox(height: 1.h),
                     TextButton(
                         onPressed: () {
                           launchUrlFromWeb(Uri.parse('https://www.zapshot.me'));
@@ -163,7 +165,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
             error: (error, stackTrace) => const Text('Error'),
           ),
           Divider(
-            height: 10.h,
+            height: 5.h,
             thickness: 2,
             indent: 10.w,
             endIndent: 10.w,
@@ -209,7 +211,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
             ],
           ),
         ],
-      )),
+      ),
     ));
   }
 }

@@ -20,7 +20,7 @@ class MainPageState extends ConsumerState<MainPage> {
         //     onPressed: () => Routemaster.of(context)
         //         .push('${CodeCheckerPage.route}?code=Test'),
         //     icon: const Icon(Icons.qr_code)),
-        title: const Text('Free UGC Secret Code'),
+        title: const Text('Secret Code for Free UGC'),
       ),
       body: const CodeGeneratorPage(),
     );
