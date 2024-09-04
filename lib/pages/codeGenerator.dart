@@ -142,7 +142,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                       ),
                       icon: Icon(Icons.copy_rounded, size: 7.w),
                       label: Blur(
-                          blur: 4.5,
+                          blur: 0.9.w,
                           child: Text(fakeSecretCode,
                               style: TextStyle(
                                 fontSize: 7.w,
