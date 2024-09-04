@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sizer/sizer.dart';
 
-final userAgentFutureProvider = FutureProvider<String>((ref) async {
-  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
-  print('Running on ${webBrowserInfo.userAgent}'); // e.g. "Mozilla/5.0
-  return webBrowserInfo.userAgent ?? 'Unknown';
-});
+import '../helpers/userAgent.dart';
 
 class CheckUserAgentPage extends ConsumerStatefulWidget {
   static const String route = '/checkUserAgent';
@@ -26,14 +21,14 @@ class CheckUserAgentPageState extends ConsumerState<CheckUserAgentPage> {
   }
 
   Widget build(BuildContext context) {
-    final userAgent = ref.watch(userAgentFutureProvider);
+    final isInZapshotWebView = ref.watch(isInZapshotWebViewProvider);
     return Scaffold(
         body: Center(
-      child: userAgent.when(
-        data: (userAgent) => Padding(
+      child: isInZapshotWebView.when(
+        data: (isInZapshot) => Padding(
           padding: EdgeInsets.all(2.w),
           child: Card(
-            child: Text('User agent: $userAgent'),
+            child: Text('Is in Zapshot WebView: $isInZapshot'),
           ),
         ),
         loading: () => const CircularProgressIndicator(),

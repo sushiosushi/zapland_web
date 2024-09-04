@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:math';
 
+import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +11,7 @@ import 'package:sizer/sizer.dart';
 import '../helpers/codeGenerator.dart';
 import '../helpers/toast.dart';
 import '../helpers/urlLauncher.dart';
+import '../helpers/userAgent.dart';
 
 class CodeGeneratorPage extends ConsumerStatefulWidget {
   const CodeGeneratorPage({super.key});
@@ -25,7 +28,10 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
 
   Widget build(BuildContext context) {
     final remainingSec = ref.watch(remainingSecProvider);
+    final isInZapshotWebView = ref.watch(isInZapshotWebViewProvider);
+
     final secretCode = ref.watch(secretCodeProvider);
+    final fakeSecretCode = ref.watch(fakeSecretCodeProvider);
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -62,20 +68,20 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                 GaugeSegment(
                   from: 0,
                   to: MAX_SEC.toDouble() / 3,
-                  color: Color(0xFFDFE2EC),
-                  cornerRadius: Radius.circular(10),
+                  color: const Color(0xFFDFE2EC),
+                  cornerRadius: const Radius.circular(10),
                 ),
                 GaugeSegment(
                   from: MAX_SEC.toDouble() / 3,
                   to: MAX_SEC.toDouble() / 3 * 2,
-                  color: Color(0xFFDFE2EC),
-                  cornerRadius: Radius.circular(10),
+                  color: const Color(0xFFDFE2EC),
+                  cornerRadius: const Radius.circular(10),
                 ),
                 GaugeSegment(
                   from: MAX_SEC.toDouble() / 3 * 2,
                   to: MAX_SEC.toDouble(),
-                  color: Color(0xFFDFE2EC),
-                  cornerRadius: Radius.circular(10),
+                  color: const Color(0xFFDFE2EC),
+                  cornerRadius: const Radius.circular(10),
                 ),
               ],
             ),
@@ -98,24 +104,64 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
             ),
           ),
           SizedBox(height: 2.w),
-          ElevatedButton.icon(
-              onPressed: () {
-                Clipboard.setData(ClipboardData(
-                  text: secretCode,
-                ));
-                showToastification(context, 'Copied to Clipboard');
-              },
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(70.w, 15.w),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.w),
-                ),
-              ),
-              icon: Icon(Icons.copy_rounded, size: 7.w),
-              label: Text(secretCode,
-                  style: TextStyle(
-                    fontSize: 7.w,
-                  ))),
+          isInZapshotWebView.when(
+            data: (isInZapshot) => isInZapshot
+                ? ElevatedButton.icon(
+                    onPressed: () {
+                      Clipboard.setData(ClipboardData(
+                        text: secretCode,
+                      ));
+                      showToastification(context, 'Copied to Clipboard');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(70.w, 15.w),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.w),
+                      ),
+                    ),
+                    icon: Icon(Icons.copy_rounded, size: 7.w),
+                    label: Text(secretCode,
+                        style: TextStyle(
+                          fontSize: 7.w,
+                        )),
+                  )
+                : Column(children: [
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Clipboard.setData(const ClipboardData(
+                            text: 'https://www.zapshot.me'));
+                        showToastificationMildError(
+                            context, "Let's Install Zapshot first!",
+                            description: 'to get the secret code');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: Size(70.w, 15.w),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.w),
+                        ),
+                      ),
+                      icon: Icon(Icons.copy_rounded, size: 7.w),
+                      label: Blur(
+                          blur: 4.5,
+                          child: Text(fakeSecretCode,
+                              style: TextStyle(
+                                fontSize: 7.w,
+                              ))),
+                    ),
+                    SizedBox(height: 2.w),
+                    TextButton(
+                        onPressed: () {
+                          launchUrlFromWeb(Uri.parse('https://www.zapshot.me'));
+                        },
+                        child: Text('* Please Install Zapshot to get the CODE.',
+                            style: TextStyle(
+                              fontSize: 3.w,
+                              color: Colors.red,
+                            ))),
+                  ]),
+            loading: () => const CircularProgressIndicator(),
+            error: (error, stackTrace) => const Text('Error'),
+          ),
           Divider(
             height: 10.h,
             thickness: 2,

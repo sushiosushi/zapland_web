@@ -23,3 +23,16 @@ Future<void> showToastification(BuildContext context, String message,
     type: ToastificationType.success,
   );
 }
+
+Future<void> showToastificationMildError(BuildContext context, String message,
+    {String? description}) async {
+  toastification.show(
+    context: context,
+    alignment: Alignment.topCenter,
+    title: Text(message),
+    description: description != null ? Text(description) : null,
+    autoCloseDuration: const Duration(seconds: 5),
+    style: ToastificationStyle.flatColored,
+    type: ToastificationType.warning,
+  );
+}

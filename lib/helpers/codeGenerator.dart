@@ -52,17 +52,6 @@ class SecretCodeController extends StateNotifier<String> {
     final hour = DateTime.now().toUtc().hour;
     final minute = DateTime.now().toUtc().minute;
 
-    // make random code by using year, month, day, hour, minute
-    // final plainText = '$year$month$day$hour$minute$version';
-    // final key = Key.fromUtf8('G6gsiPgCycXjgS3iLDec5Si57rpW02YP');
-
-    // final iv = IV.fromLength(8);
-    // final encrypter = Encrypter(Salsa20(key));
-
-    // final encrypted = encrypter.encrypt(plainText, iv: iv);
-
-    // print('plainText: ${plainText} eccrypted: ${encrypted.base64}');
-
     final sum = ((year + month * day) + hour * minute) + version * 683;
 
     var nums = <int>[];
@@ -96,5 +85,33 @@ class SecretCodeController extends StateNotifier<String> {
   checkIfValid(String? code) {
     // print('code: $code state: $state');
     return state == code;
+  }
+}
+
+final fakeSecretCodeProvider =
+    StateNotifierProvider<FakeSecretCodeController, String>(
+        (_) => FakeSecretCodeController());
+
+class FakeSecretCodeController extends StateNotifier<String> {
+  FakeSecretCodeController() : super('') {
+    final version = DateTime.now().toUtc().second ~/ MAX_SEC;
+    generate(version);
+
+    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      if (DateTime.now().toUtc().second % MAX_SEC == 0) {
+        final version = DateTime.now().toUtc().second ~/ MAX_SEC;
+        generate(version);
+      }
+    });
+  }
+
+  generate(int version) {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    // random alphabet (6 length)
+    final fakeSecretCode =
+        List.generate(6, (index) => alphabet[Random().nextInt(26)]).join();
+
+    state = fakeSecretCode;
   }
 }

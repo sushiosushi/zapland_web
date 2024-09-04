@@ -45,10 +45,8 @@ class MyAppState extends ConsumerState<MyApp> {
           routesBuilder: (context) => RouteMap(
               routes: {
                 '/': (routeData) => const MaterialPage(child: MainPage()),
-                CodeCheckerPage.route: (routeData) => checkIfValidCode(ref,
-                    code: routeData.queryParameters['code']),
-                // NotFoundPage.route: (routeData) =>
-                //     const MaterialPage(child: NotFoundPage()),
+                // CodeCheckerPage.route: (routeData) => checkIfValidCode(ref,
+                //     code: routeData.queryParameters['code']),
                 CheckUserAgentPage.route: (routeData) =>
                     const MaterialPage(child: CheckUserAgentPage()),
               },
