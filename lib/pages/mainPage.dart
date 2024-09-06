@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:icons_plus/icons_plus.dart';
-import 'package:lottie/lottie.dart';
-import 'package:routemaster/routemaster.dart';
-import 'package:zapland_web/pages/codeChecker.dart';
 import 'package:zapland_web/pages/codeGenerator.dart';
 
 class MainPage extends ConsumerStatefulWidget {
