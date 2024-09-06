@@ -233,7 +233,8 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
           ),
           SizedBox(height: 2.h),
           Image.asset(
-            'assets/robloxMeme/${Random().nextInt(6) + 1}.gif',
+            // 'assets/robloxMeme/${Random().nextInt(6) + 1}.gif',
+            'assets/robloxMeme/1.gif',
             fit: BoxFit.contain,
             width: 80.w,
             height: (80 / 16 * 9).w,
