@@ -3,10 +3,12 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:blur/blur.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
+import 'package:meta_seo/meta_seo.dart';
 import 'package:sizer/sizer.dart';
 
 import '../helpers/codeGenerator.dart';
@@ -35,6 +37,19 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
     final fakeSecretCode = ref.watch(fakeSecretCodeProvider);
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    isInZapshotWebView.when(
+      data: (isInZapshot) {
+        if (!isInZapshot && kIsWeb) {
+          // <meta name="apple-itunes-app" content="app-id=1529511175" />
+          MetaSEO meta = MetaSEO();
+          meta.nameContent(
+              name: 'apple-itunes-app', content: 'app-id=1529511175');
+        }
+      },
+      loading: () => null,
+      error: (error, stackTrace) => null,
+    );
 
     return Scaffold(
         body: SingleChildScrollView(

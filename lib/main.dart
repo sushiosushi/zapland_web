@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meta_seo/meta_seo.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:sizer/sizer.dart';
 import 'package:zapland_web/pages/codeChecker.dart';
@@ -16,6 +18,9 @@ import 'pages/notFound.dart';
 Future<void> main() async {
   usePathUrlStrategy(); //TODO: Remove # from URL
   await dotenv.load(fileName: 'env');
+  if (kIsWeb) {
+    MetaSEO().config();
+  }
 
   runApp(const ProviderScope(child: MyApp()));
 }
