@@ -42,7 +42,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: 5.h),
+          SizedBox(height: 3.h),
           AnimatedRadialGauge(
             duration: const Duration(seconds: 1),
             curve: Curves.elasticOut,
@@ -116,12 +116,12 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                       showToastification(context, 'Copied to Clipboard');
                     },
                     style: ElevatedButton.styleFrom(
-                      fixedSize: Size(70.w, 15.w),
+                      fixedSize: Size(60.w, 14.w),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.w),
+                        borderRadius: BorderRadius.circular(6.w),
                       ),
                     ),
-                    icon: Icon(Icons.copy_rounded, size: 7.w),
+                    icon: Icon(Icons.copy_rounded, size: 6.w),
                     label: Text(secretCode,
                         style: TextStyle(
                           fontSize: 7.w,
@@ -137,12 +137,12 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                             description: 'to get the secret code');
                       },
                       style: ElevatedButton.styleFrom(
-                        fixedSize: Size(70.w, 15.w),
+                        fixedSize: Size(60.w, 14.w),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5.w),
                         ),
                       ),
-                      icon: Icon(Icons.copy_rounded, size: 7.w),
+                      icon: Icon(Icons.copy_rounded, size: 6.w),
                       label: ImageFiltered(
                           imageFilter:
                               ImageFilter.blur(sigmaX: 1.w, sigmaY: 1.w),
@@ -160,13 +160,33 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                             style: TextStyle(
                               fontSize: 3.w,
                               color: Colors.red,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.red,
+                              decorationThickness: 2,
                             ))),
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(3.w),
+                        child: Material(
+                            child: Ink.image(
+                          fit: BoxFit.contain,
+                          width: 50.w,
+                          height: 13.w,
+                          image: isDark
+                              ? const AssetImage('assets/zapshot/badge.png')
+                              : const AssetImage('assets/zapshot/badge.png'),
+                          child: InkWell(
+                              borderRadius: BorderRadius.circular(5),
+                              onTap: () => launchUrlFromWeb(Uri.parse(
+                                  'https://z.ps/l/b1mk9ycj?zapshotWeb')),
+                              splashColor:
+                                  const Color(0xff000000).withAlpha(30)),
+                        ))),
                   ]),
             loading: () => const CircularProgressIndicator(),
             error: (error, stackTrace) => const Text('Error'),
           ),
           Divider(
-            height: 5.h,
+            height: 4.h,
             thickness: 2,
             indent: 10.w,
             endIndent: 10.w,
@@ -210,6 +230,13 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         splashColor: const Color(0xff000000).withAlpha(30)),
                   ))),
             ],
+          ),
+          SizedBox(height: 2.h),
+          Image.asset(
+            'assets/robloxMeme/${Random().nextInt(6) + 1}.gif',
+            fit: BoxFit.contain,
+            width: 80.w,
+            height: (80 / 16 * 9).w,
           ),
         ],
       ),

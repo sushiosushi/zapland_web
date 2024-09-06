@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icons_plus/icons_plus.dart';
+import 'package:lottie/lottie.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:zapland_web/pages/codeChecker.dart';
 import 'package:zapland_web/pages/codeGenerator.dart';
@@ -16,12 +18,13 @@ class MainPageState extends ConsumerState<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //     onPressed: () => Routemaster.of(context)
-        //         .push('${CodeCheckerPage.route}?code=Test'),
-        //     icon: const Icon(Icons.qr_code)),
-        title: const Text('Secret Code for Free UGC'),
-      ),
+          title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Image.asset('assets/roblox/roblox_icon.png', height: 35),
+        const SizedBox(width: 5),
+        const Text('Free UGC'),
+        const SizedBox(width: 8),
+        Image.asset('assets/zapshot/logo_only.png', height: 26),
+      ])),
       body: const CodeGeneratorPage(),
     );
   }
