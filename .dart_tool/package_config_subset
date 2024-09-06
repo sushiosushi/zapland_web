@@ -158,10 +158,6 @@ meta
 2.12
 file:///Users/kaedeee/.pub-cache/hosted/pub.dev/meta-1.10.0/
 file:///Users/kaedeee/.pub-cache/hosted/pub.dev/meta-1.10.0/lib/
-meta_seo
-3.0
-file:///Users/kaedeee/.pub-cache/hosted/pub.dev/meta_seo-3.0.9/
-file:///Users/kaedeee/.pub-cache/hosted/pub.dev/meta_seo-3.0.9/lib/
 path
 2.12
 file:///Users/kaedeee/.pub-cache/hosted/pub.dev/path-1.8.3/
@@ -194,6 +190,10 @@ sizer
 2.12
 file:///Users/kaedeee/.pub-cache/hosted/pub.dev/sizer-2.0.15/
 file:///Users/kaedeee/.pub-cache/hosted/pub.dev/sizer-2.0.15/lib/
+smart_banner
+2.18
+file:///Users/kaedeee/.pub-cache/hosted/pub.dev/smart_banner-0.2.2/
+file:///Users/kaedeee/.pub-cache/hosted/pub.dev/smart_banner-0.2.2/lib/
 source_span
 2.18
 file:///Users/kaedeee/.pub-cache/hosted/pub.dev/source_span-1.10.0/
