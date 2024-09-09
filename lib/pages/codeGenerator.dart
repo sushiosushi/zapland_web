@@ -177,7 +177,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                           child: InkWell(
                               borderRadius: BorderRadius.circular(5),
                               onTap: () => launchUrlFromWeb(Uri.parse(
-                                  'https://z.ps/l/b1mk9ycj?zapshotWeb')),
+                                  'https://z.ps/r/66601726af96b2001442f100')), //'https://z.ps/l/b1mk9ycj?zapshotWeb')),
                               splashColor:
                                   const Color(0xff000000).withAlpha(30)),
                         ))),
