@@ -27,10 +27,6 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   showSmartAppBannerToastification(context, 'Zapshot- Make Friends Closer!',
-    //       description: '');
-    // });
   }
 
   Widget build(BuildContext context) {
