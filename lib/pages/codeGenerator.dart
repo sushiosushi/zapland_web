@@ -38,18 +38,19 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    // showToastification(context, "test", description: "test");
+    var safeWidth = SizerUtil.getWebResponsiveSize(
+        smallSize: 95.w, mediumSize: 60.w, largeSize: 500);
 
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: 3.h),
+          const SizedBox(height: 20),
           AnimatedRadialGauge(
             duration: const Duration(seconds: 1),
             curve: Curves.elasticOut,
-            radius: 25.w,
+            radius: safeWidth * 0.25,
             value: remainingSec.toDouble(),
             axis: GaugeAxis(
               min: 0,
@@ -95,20 +96,20 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                 remainingSec.toString(),
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  fontSize: 19.w,
+                  fontSize: safeWidth * 0.2,
                 ),
                 maxLines: 1,
               ),
             ),
           ),
-          SizedBox(height: 3.h),
+          const SizedBox(height: 20),
           Text(
             'SECRET CODE',
             style: TextStyle(
-              fontSize: 5.w,
+              fontSize: safeWidth * 0.06,
             ),
           ),
-          SizedBox(height: 1.h),
+          const SizedBox(height: 20 / 2),
           isInZapshotWebView.when(
             data: (isInZapshot) => isInZapshot
                 ? ElevatedButton.icon(
@@ -119,7 +120,10 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                       showToastification(context, 'Copied to Clipboard');
                     },
                     style: ElevatedButton.styleFrom(
-                      fixedSize: Size(60.w, 14.w),
+                      fixedSize: Size(
+                        safeWidth * 0.7,
+                        safeWidth * 0.7 / 60 * 14,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6.w),
                       ),
@@ -127,7 +131,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                     icon: Icon(Icons.copy_rounded, size: 6.w),
                     label: Text(secretCode,
                         style: TextStyle(
-                          fontSize: 7.w,
+                          fontSize: safeWidth * 0.08,
                         )),
                   )
                 : Column(children: [
@@ -140,21 +144,29 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                             description: 'to get the secret code');
                       },
                       style: ElevatedButton.styleFrom(
-                        fixedSize: Size(60.w, 14.w),
+                        fixedSize: Size(
+                          safeWidth * 0.7,
+                          safeWidth * 0.7 / 60 * 14,
+                        ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.w),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      icon: Icon(Icons.copy_rounded, size: 6.w),
+                      icon: Icon(
+                        Icons.copy_rounded,
+                        size: safeWidth * 0.08,
+                      ),
                       label: ImageFiltered(
-                          imageFilter:
-                              ImageFilter.blur(sigmaX: 1.w, sigmaY: 1.w),
+                          imageFilter: ImageFilter.blur(
+                            sigmaX: safeWidth * 0.014,
+                            sigmaY: safeWidth * 0.014,
+                          ),
                           child: Text(fakeSecretCode,
                               style: TextStyle(
-                                fontSize: 7.w,
+                                fontSize: safeWidth * 0.08,
                               ))),
                     ),
-                    SizedBox(height: 1.h),
+                    const SizedBox(height: 10),
                     TextButton(
                         onPressed: () {
                           launchUrlFromWeb(
@@ -162,19 +174,20 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         },
                         child: Text('* Please Install Zapshot to get the CODE.',
                             style: TextStyle(
-                              fontSize: 3.w,
+                              fontSize: safeWidth * 0.03,
                               color: Colors.red,
                               decoration: TextDecoration.underline,
                               decorationColor: Colors.red,
                               decorationThickness: 2,
                             ))),
+                    const SizedBox(height: 10),
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(3.w),
+                        borderRadius: BorderRadius.circular(50),
                         child: Material(
                             child: Ink.image(
                           fit: BoxFit.contain,
-                          width: 50.w,
-                          height: 13.w,
+                          width: safeWidth * 0.5,
+                          height: safeWidth * 0.5 / 50 * 11,
                           image: isDark
                               ? const AssetImage('assets/zapshot/badge.png')
                               : const AssetImage('assets/zapshot/badge.png'),
@@ -190,20 +203,20 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
             error: (error, stackTrace) => const Text('Error'),
           ),
           Divider(
-            height: 4.h,
+            height: 20 * 2,
             thickness: 2,
-            indent: 10.w,
-            endIndent: 10.w,
+            indent: (100.w - safeWidth) / 2,
+            endIndent: (100.w - safeWidth) / 2,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(3.w),
+                borderRadius: BorderRadius.circular(20),
                 child: Material(
                   child: Ink.image(
-                    width: 15.w,
-                    height: 15.w,
+                    width: safeWidth * 0.18,
+                    height: safeWidth * 0.18,
                     image: const AssetImage('assets/roblox/icon.png'),
                     child: InkWell(
                         borderRadius: BorderRadius.circular(10),
@@ -213,14 +226,14 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                   ),
                 ),
               ),
-              SizedBox(width: 5.w),
+              const SizedBox(width: 20),
               ClipRRect(
-                  borderRadius: BorderRadius.circular(3.w),
+                  borderRadius: BorderRadius.circular(20),
                   child: Material(
                       child: Ink.image(
                     fit: BoxFit.fill,
-                    width: 36.w,
-                    height: 16.w,
+                    width: safeWidth * 0.4,
+                    height: safeWidth * 0.4 / 36 * 16,
                     image:
 
                         // get if darkmode or lightmode
@@ -235,13 +248,13 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                   ))),
             ],
           ),
-          SizedBox(height: 2.h),
+          const SizedBox(height: 20),
           Image.asset(
             // 'assets/robloxMeme/${Random().nextInt(6) + 1}.gif',
             'assets/robloxMeme/1.gif',
             fit: BoxFit.contain,
-            width: 80.w,
-            height: (80 / 16 * 9).w,
+            width: safeWidth * 0.9,
+            height: safeWidth * 0.9 / 16 * 9,
           ),
         ],
       ),
