@@ -27,6 +27,10 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
   @override
   void initState() {
     super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   showSmartAppBannerToastification(context, 'Zapshot- Make Friends Closer!',
+    //       description: '');
+    // });
   }
 
   Widget build(BuildContext context) {
@@ -37,6 +41,8 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
     final fakeSecretCode = ref.watch(fakeSecretCodeProvider);
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // showToastification(context, "test", description: "test");
 
     return Scaffold(
         body: SingleChildScrollView(

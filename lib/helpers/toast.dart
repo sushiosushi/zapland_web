@@ -24,6 +24,20 @@ Future<void> showToastification(BuildContext context, String message,
   );
 }
 
+Future<void> showSmartAppBannerToastification(
+    BuildContext context, String message,
+    {String? description}) async {
+  toastification.show(
+    context: context,
+    alignment: Alignment.topCenter,
+    title: Text(message),
+    description: description != null ? Text(description) : null,
+    autoCloseDuration: const Duration(seconds: 15),
+    style: ToastificationStyle.flatColored,
+    type: ToastificationType.success,
+  );
+}
+
 Future<void> showToastificationMildError(BuildContext context, String message,
     {String? description}) async {
   toastification.show(
