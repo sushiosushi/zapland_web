@@ -6,6 +6,7 @@ import 'package:blur/blur.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 import 'package:sizer/sizer.dart';
@@ -154,7 +155,8 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                     SizedBox(height: 1.h),
                     TextButton(
                         onPressed: () {
-                          launchUrlFromWeb(Uri.parse('https://www.zapshot.me'));
+                          launchUrlFromWeb(
+                              Uri.parse(dotenv.get('APP_STORE_LINK')));
                         },
                         child: Text('* Please Install Zapshot to get the CODE.',
                             style: TextStyle(
@@ -176,8 +178,8 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                               : const AssetImage('assets/zapshot/badge.png'),
                           child: InkWell(
                               borderRadius: BorderRadius.circular(5),
-                              onTap: () => launchUrlFromWeb(Uri.parse(
-                                  'https://z.ps/r/66601726af96b2001442f100')), //'https://z.ps/l/b1mk9ycj?zapshotWeb')),
+                              onTap: () => launchUrlFromWeb(
+                                  Uri.parse(dotenv.get('APP_STORE_LINK'))),
                               splashColor:
                                   const Color(0xff000000).withAlpha(30)),
                         ))),
