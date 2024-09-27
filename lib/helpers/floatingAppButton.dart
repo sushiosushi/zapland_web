@@ -13,7 +13,8 @@ Widget floatingAppButton(BuildContext context) {
       },
       child: GlassContainer(
         blur: 100,
-        height: 10.h,
+        // color: Colors.white.withOpacity(0.9),
+        height: 22.w,
         width: 90.w,
         borderRadius: BorderRadius.circular(20),
         child: Padding(
@@ -38,22 +39,18 @@ Widget floatingAppButton(BuildContext context) {
                       Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 1.w),
-                              child: Opacity(
-                                opacity: 0.5,
-                                child: Icon(FontAwesome.app_store_ios_brand,
-                                    size: 1.8.h),
-                              ),
-                            ),
                             Opacity(
-                              opacity: 0.5,
+                              opacity: 0.6,
                               child: Text(
                                 'App Store',
                                 style: CupertinoTheme.of(context)
                                     .textTheme
                                     .textStyle
-                                    .copyWith(fontSize: 10.sp),
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.color),
                               ),
                             ),
                           ]),
@@ -61,18 +58,30 @@ Widget floatingAppButton(BuildContext context) {
                         padding: EdgeInsets.symmetric(vertical: 0.3.h),
                         child: Text(
                           'Zapshot - Make Friends Closer',
-                          style: CupertinoTheme.of(context).textTheme.textStyle,
+                          style: CupertinoTheme.of(context)
+                              .textTheme
+                              .textStyle
+                              .copyWith(
+                                  fontSize: 2.h,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Opacity(
-                        opacity: 0.5,
+                        opacity: 0.6,
                         child: Text(
                           'Social Networking',
                           style: CupertinoTheme.of(context)
                               .textTheme
                               .textStyle
-                              .copyWith(fontSize: 10.sp),
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.color),
                         ),
                       ),
                     ],
