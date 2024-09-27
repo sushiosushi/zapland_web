@@ -98,7 +98,9 @@ Widget floatingAppButton(BuildContext context) {
                       backgroundColor: const Color(0xff017AFF),
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launchUrlFromWeb(Uri.parse(dotenv.get('APP_STORE_LINK')));
+                    },
                     child: Text(
                       'Get',
                       style: CupertinoTheme.of(context)

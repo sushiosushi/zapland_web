@@ -17,6 +17,7 @@ class MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     final isInZapshotWebView = ref.watch(isInZapshotWebViewProvider);
+    print('isInZapshotWebView: $isInZapshotWebView');
 
     return Scaffold(
       appBar: AppBar(
@@ -28,8 +29,11 @@ class MainPageState extends ConsumerState<MainPage> {
         Image.asset('assets/zapshot/logo_only.png', height: 26),
       ])),
       body: const CodeGeneratorPage(),
-      floatingActionButton:
-          isInZapshotWebView == true ? null : floatingAppButton(context),
+      floatingActionButton: isInZapshotWebView.when(
+        data: (isInZapshot) => floatingAppButton(context),
+        loading: () => null,
+        error: (error, stackTrace) => Text('Error: $error'),
+      ),
       floatingActionButtonLocation: CustomizeFloatingLocation(
           FloatingActionButtonLocation.centerFloat, 0, -20),
     );
