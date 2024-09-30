@@ -50,61 +50,112 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           const SizedBox(height: 20),
-          AnimatedRadialGauge(
-            duration: const Duration(seconds: 1),
-            curve: Curves.elasticOut,
-            radius: safeWidth * 0.25,
-            value: remainingSec.toDouble(),
-            axis: GaugeAxis(
-              min: 0,
-              max: MAX_SEC.toDouble(),
-              degrees: 300,
-              style: const GaugeAxisStyle(
-                background: Colors.transparent,
-                thickness: 20,
-                segmentSpacing: 4,
-              ),
-              progressBar: const GaugeProgressBar.rounded(
-                  // color: Color(0xFFB4C2F8),
-                  gradient: GaugeAxisGradient(colors: [
-                Color(0xFF3CFF8A),
-                Color(0xFF3CADFF),
-              ], colorStops: [
-                0.3,
-                0.7,
-              ])),
-              segments: [
-                GaugeSegment(
-                  from: 0,
-                  to: MAX_SEC.toDouble() / 3,
-                  color: const Color(0xFFDFE2EC),
-                  cornerRadius: const Radius.circular(10),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  width: safeWidth * 0.25,
+                  height: safeWidth * 0.25,
+                  // round corner
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: Theme.of(context).disabledColor,
+                  ),
+
+                  child: Stack(fit: StackFit.expand, children: [
+                    Image.network(
+                      'https://tr.rbxcdn.com/e165aa0c8736732bc206818ff49072d7/700/700/Hat/Png',
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Image.asset(
+                        'assets/roblox/Roblox_Limited_U_Label.png',
+                        width: safeWidth * 0.25,
+                      ),
+                    ),
+                  ]),
                 ),
-                GaugeSegment(
-                  from: MAX_SEC.toDouble() / 3,
-                  to: MAX_SEC.toDouble() / 3 * 2,
-                  color: const Color(0xFFDFE2EC),
-                  cornerRadius: const Radius.circular(10),
+                SizedBox(width: safeWidth * 0.05),
+                AnimatedRadialGauge(
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.elasticOut,
+                  radius: safeWidth * 0.2,
+                  value: remainingSec.toDouble(),
+                  axis: GaugeAxis(
+                    min: 0,
+                    max: MAX_SEC.toDouble(),
+                    degrees: 300,
+                    style: const GaugeAxisStyle(
+                      background: Colors.transparent,
+                      thickness: 20,
+                      segmentSpacing: 4,
+                    ),
+                    progressBar: const GaugeProgressBar.rounded(
+                        // color: Color(0xFFB4C2F8),
+                        gradient: GaugeAxisGradient(colors: [
+                      Color(0xFF3CFF8A),
+                      Color(0xFF3CADFF),
+                    ], colorStops: [
+                      0.3,
+                      0.7,
+                    ])),
+                    segments: [
+                      GaugeSegment(
+                        from: 0,
+                        to: MAX_SEC.toDouble() / 3,
+                        color: const Color(0xFFDFE2EC),
+                        cornerRadius: const Radius.circular(10),
+                      ),
+                      GaugeSegment(
+                        from: MAX_SEC.toDouble() / 3,
+                        to: MAX_SEC.toDouble() / 3 * 2,
+                        color: const Color(0xFFDFE2EC),
+                        cornerRadius: const Radius.circular(10),
+                      ),
+                      GaugeSegment(
+                        from: MAX_SEC.toDouble() / 3 * 2,
+                        to: MAX_SEC.toDouble(),
+                        color: const Color(0xFFDFE2EC),
+                        cornerRadius: const Radius.circular(10),
+                      ),
+                    ],
+                  ),
+                  builder: (context, child, value) => Center(
+                    child: Text(
+                      remainingSec.toString(),
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: safeWidth * 0.15,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
                 ),
-                GaugeSegment(
-                  from: MAX_SEC.toDouble() / 3 * 2,
-                  to: MAX_SEC.toDouble(),
-                  color: const Color(0xFFDFE2EC),
-                  cornerRadius: const Radius.circular(10),
+                SizedBox(width: safeWidth * 0.05),
+                Container(
+                  width: safeWidth * 0.25,
+                  height: safeWidth * 0.25,
+                  // round corner
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: Theme.of(context).disabledColor,
+                  ),
+
+                  child: Stack(fit: StackFit.expand, children: [
+                    Image.network(
+                      'https://tr.rbxcdn.com/e6bc625e982b8b79fcb9f2d5fd20f66b/700/700/Hat/Png',
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Image.asset(
+                        'assets/roblox/Roblox_Limited_U_Label.png',
+                        width: safeWidth * 0.25,
+                      ),
+                    ),
+                  ]),
                 ),
-              ],
-            ),
-            builder: (context, child, value) => Center(
-              child: Text(
-                remainingSec.toString(),
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontSize: safeWidth * 0.2,
-                ),
-                maxLines: 1,
-              ),
-            ),
-          ),
+              ]),
           const SizedBox(height: 20),
           Text(
             'SECRET CODE',
@@ -289,6 +340,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
             width: safeWidth * 0.9,
             height: safeWidth * 0.9 / 16 * 9,
           ),
+          const SizedBox(height: 150),
         ],
       ),
     ));
