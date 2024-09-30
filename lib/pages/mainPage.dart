@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zapland_web/pages/codeGenerator.dart';
 
 import '../helpers/CustomizeFloatingLocation.dart';
+import '../helpers/firebaseAnalytics.dart';
 import '../helpers/floatingAppButton.dart';
 import '../helpers/userAgent.dart';
 
@@ -17,6 +18,17 @@ class MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     final isInZapshotWebView = ref.watch(isInZapshotWebViewProvider);
+    var analytics = ref.watch(analyticsRepository);
+
+    isInZapshotWebView.when(
+      data: (isInZapshot) {
+        analytics.logEvent(
+            name: 'is_in_zapshot_webview',
+            parameters: {'is_in_zapshot': isInZapshot.toString()});
+      },
+      loading: () => false,
+      error: (error, stackTrace) => false,
+    );
 
     return Scaffold(
       appBar: AppBar(
