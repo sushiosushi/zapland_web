@@ -27,15 +27,15 @@ dependencies:
   pointycastle: ^3.9.1
   device_info_plus: ^9.1.2
   # device_user_agent: ^0.1.1
-  web: ^0.4.0
+  # web: ^0.3.0
   blur: ^3.1.0
   lottie: ^3.1.2
   glassmorphism_ui: ^0.3.0
   firebase_analytics: ^10.8.9
 
 dev_dependencies:
-  # flutter_test:
-  #   sdk: flutter
+  flutter_test:
+    sdk: flutter
   flutter_lints: ^2.0.0
 
 flutter_launcher_icons:
