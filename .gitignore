@@ -72,4 +72,4 @@ node_modules/
 .fvm/
 
 # flutter tool
-.dart_tool/
+.dart_tool
