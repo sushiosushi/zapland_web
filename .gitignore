@@ -70,3 +70,6 @@ node_modules/
 
 # FVM Version Cache
 .fvm/
+
+# flutter tool
+.dart_tool/
