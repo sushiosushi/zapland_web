@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,6 +45,9 @@ class MyAppState extends ConsumerState<MyApp> {
     var analytics = ref.watch(analyticsRepository);
     var analyticsObserver = ref.watch(analyticsObserverRepository);
 
+    if (!kReleaseMode) {
+      analytics.setAnalyticsCollectionEnabled(false);
+    }
     analytics.logAppOpen();
 
     return Sizer(builder: (context, orientation, deviceType) {

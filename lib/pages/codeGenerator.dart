@@ -12,6 +12,7 @@ import 'package:gauge_indicator/gauge_indicator.dart';
 import 'package:sizer/sizer.dart';
 
 import '../helpers/codeGenerator.dart';
+import '../helpers/firebaseAnalytics.dart';
 import '../helpers/toast.dart';
 import '../helpers/urlLauncher.dart';
 import '../helpers/userAgent.dart';
@@ -40,6 +41,8 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
 
     var safeWidth = SizerUtil.getWebResponsiveSize(
         smallSize: 95.w, mediumSize: 60.w, largeSize: 500);
+
+    var analytics = ref.watch(analyticsRepository);
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -118,6 +121,9 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         text: secretCode,
                       ));
                       showToastification(context, 'Copied to Clipboard');
+                      analytics.logEvent(
+                          name: 'copied_secret_code_button',
+                          parameters: {"isValid": isInZapshot.toString()});
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(
@@ -137,11 +143,14 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                 : Column(children: [
                     ElevatedButton.icon(
                       onPressed: () {
-                        Clipboard.setData(const ClipboardData(
-                            text: 'https://www.zapshot.me'));
+                        Clipboard.setData(
+                            ClipboardData(text: dotenv.get('APP_STORE_LINK')));
                         showToastificationMildError(
                             context, "Let's Install Zapshot first!",
                             description: 'to get the secret code');
+                        analytics.logEvent(
+                            name: 'copied_secret_code_button',
+                            parameters: {"isValid": isInZapshot.toString()});
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(
@@ -171,6 +180,11 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         onPressed: () {
                           launchUrlFromWeb(
                               Uri.parse(dotenv.get('APP_STORE_LINK')));
+                          analytics.logEvent(
+                              name: 'install_zapshot_text_button',
+                              parameters: {
+                                "isInZapshot": isInZapshot.toString()
+                              });
                         },
                         child: Text('* Please Install Zapshot to get the CODE.',
                             style: TextStyle(
@@ -193,8 +207,16 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                               : const AssetImage('assets/zapshot/badge.png'),
                           child: InkWell(
                               borderRadius: BorderRadius.circular(5),
-                              onTap: () => launchUrlFromWeb(
-                                  Uri.parse(dotenv.get('APP_STORE_LINK'))),
+                              onTap: () {
+                                launchUrlFromWeb(
+                                    Uri.parse(dotenv.get('APP_STORE_LINK')));
+
+                                analytics.logEvent(
+                                    name: 'view_in_zapshot_badge_button',
+                                    parameters: {
+                                      "isInZapshot": isInZapshot.toString()
+                                    });
+                              },
                               splashColor:
                                   const Color(0xff000000).withAlpha(30)),
                         ))),
@@ -220,8 +242,14 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                     image: const AssetImage('assets/roblox/icon.png'),
                     child: InkWell(
                         borderRadius: BorderRadius.circular(10),
-                        onTap: () => launchUrlFromWeb(Uri.parse(
-                            'https://www.roblox.com/games/16273429138/')),
+                        onTap: () {
+                          launchUrlFromWeb(Uri.parse(
+                              'https://www.roblox.com/games/16273429138/'));
+
+                          analytics.logEvent(
+                              name: 'now_on_roblox_button_left',
+                              parameters: {});
+                        },
                         splashColor: const Color(0xff000000).withAlpha(30)),
                   ),
                 ),
@@ -242,8 +270,13 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                             : const AssetImage('assets/roblox/badge_black.png'),
                     child: InkWell(
                         borderRadius: BorderRadius.circular(5),
-                        onTap: () => launchUrlFromWeb(Uri.parse(
-                            'https://www.roblox.com/games/16273429138/')),
+                        onTap: () {
+                          launchUrlFromWeb(Uri.parse(
+                              'https://www.roblox.com/games/16273429138/'));
+                          analytics.logEvent(
+                              name: 'now_on_roblox_button_right',
+                              parameters: {});
+                        },
                         splashColor: const Color(0xff000000).withAlpha(30)),
                   ))),
             ],

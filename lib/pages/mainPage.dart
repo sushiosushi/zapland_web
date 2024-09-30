@@ -41,7 +41,8 @@ class MainPageState extends ConsumerState<MainPage> {
       ])),
       body: const CodeGeneratorPage(),
       floatingActionButton: isInZapshotWebView.when(
-        data: (isInZapshot) => isInZapshot ? null : floatingAppButton(context),
+        data: (isInZapshot) =>
+            isInZapshot ? null : floatingAppButton(context, ref),
         loading: () => null,
         error: (error, stackTrace) => Text('Error: $error'),
       ),

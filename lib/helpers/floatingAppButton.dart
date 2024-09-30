@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:sizer/sizer.dart';
+import 'package:zapland_web/helpers/firebaseAnalytics.dart';
 import '../helpers/urlLauncher.dart';
 import 'sizer.dart';
 
-Widget floatingAppButton(BuildContext context) {
+Widget floatingAppButton(BuildContext context, ref) {
   var width = SizerUtil.getWebResponsiveSize(
       smallSize: 90.w, mediumSize: 65.w, largeSize: 590);
+
+  var analytics = ref.watch(analyticsRepository);
 
   return GestureDetector(
       onTap: () {
         launchUrlFromWeb(Uri.parse(dotenv.get('APP_STORE_LINK')));
+        analytics.logEvent(name: 'overlay_card');
       },
       child: GlassContainer(
           blur: 100,
-          // color: Colors.white.withOpacity(0.9),
+          color: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),
           width: width,
           borderRadius: BorderRadius.circular(20),
           child: AspectRatio(
@@ -100,6 +104,7 @@ Widget floatingAppButton(BuildContext context) {
                     ),
                     onPressed: () {
                       launchUrlFromWeb(Uri.parse(dotenv.get('APP_STORE_LINK')));
+                      analytics.logEvent(name: 'overlay_text_button');
                     },
                     child: Text(
                       'Get',
