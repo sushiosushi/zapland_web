@@ -71,7 +71,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                       alignment: Alignment.bottomLeft,
                       child: Image.asset(
                         'assets/roblox/Roblox_Limited_U_Label.png',
-                        width: safeWidth * 0.25,
+                        width: safeWidth * 0.2,
                       ),
                     ),
                   ]),
@@ -150,7 +150,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                       alignment: Alignment.bottomLeft,
                       child: Image.asset(
                         'assets/roblox/Roblox_Limited_U_Label.png',
-                        width: safeWidth * 0.25,
+                        width: safeWidth * 0.2,
                       ),
                     ),
                   ]),
