@@ -16,7 +16,7 @@ Widget floatingAppButton(BuildContext context, ref) {
   return GestureDetector(
       onTap: () {
         launchUrlFromWeb(Uri.parse(dotenv.get('APP_STORE_LINK')));
-        analytics.logEvent(name: 'overlay_card');
+        analytics.logEvent(name: '_overlay_card');
       },
       child: GlassContainer(
           blur: 100,
@@ -104,7 +104,7 @@ Widget floatingAppButton(BuildContext context, ref) {
                     ),
                     onPressed: () {
                       launchUrlFromWeb(Uri.parse(dotenv.get('APP_STORE_LINK')));
-                      analytics.logEvent(name: 'overlay_text_button');
+                      analytics.logEvent(name: '_overlay_text_button');
                     },
                     child: Text(
                       'Get',

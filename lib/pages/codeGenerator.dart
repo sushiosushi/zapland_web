@@ -172,9 +172,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         text: secretCode,
                       ));
                       showToastification(context, 'Copied to Clipboard');
-                      analytics.logEvent(
-                          name: 'copied_secret_code_button',
-                          parameters: {"isValid": isInZapshot.toString()});
+                      analytics.logEvent(name: 'secret_code_button_valid');
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(
@@ -199,9 +197,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         showToastificationMildError(
                             context, "Let's Install Zapshot first!",
                             description: 'to get the secret code');
-                        analytics.logEvent(
-                            name: 'copied_secret_code_button',
-                            parameters: {"isValid": isInZapshot.toString()});
+                        analytics.logEvent(name: 'secret_code_button_invalid');
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(
@@ -232,7 +228,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                           launchUrlFromWeb(
                               Uri.parse(dotenv.get('APP_STORE_LINK')));
                           analytics.logEvent(
-                              name: 'install_zapshot_text_button',
+                              name: '_install_zapshot_text_button',
                               parameters: {
                                 "isInZapshot": isInZapshot.toString()
                               });
@@ -263,7 +259,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                                     Uri.parse(dotenv.get('APP_STORE_LINK')));
 
                                 analytics.logEvent(
-                                    name: 'view_in_zapshot_badge_button',
+                                    name: '_view_in_zapshot_button',
                                     parameters: {
                                       "isInZapshot": isInZapshot.toString()
                                     });
@@ -298,8 +294,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                               'https://www.roblox.com/games/16273429138/'));
 
                           analytics.logEvent(
-                              name: 'now_on_roblox_button_left',
-                              parameters: {});
+                              name: 'roblox_button_l', parameters: {});
                         },
                         splashColor: const Color(0xff000000).withAlpha(30)),
                   ),
@@ -325,8 +320,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                           launchUrlFromWeb(Uri.parse(
                               'https://www.roblox.com/games/16273429138/'));
                           analytics.logEvent(
-                              name: 'now_on_roblox_button_right',
-                              parameters: {});
+                              name: 'roblox_button_r', parameters: {});
                         },
                         splashColor: const Color(0xff000000).withAlpha(30)),
                   ))),

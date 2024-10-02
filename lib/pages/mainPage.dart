@@ -22,9 +22,11 @@ class MainPageState extends ConsumerState<MainPage> {
 
     isInZapshotWebView.when(
       data: (isInZapshot) {
-        analytics.logEvent(
-            name: 'is_in_zapshot_webview',
-            parameters: {'is_in_zapshot': isInZapshot.toString()});
+        if (isInZapshot) {
+          analytics.logEvent(name: 'in_zapshot_webview');
+        } else {
+          analytics.logEvent(name: 'in_normal_webview');
+        }
       },
       loading: () => false,
       error: (error, stackTrace) => false,
