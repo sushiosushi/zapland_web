@@ -176,17 +176,17 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(
-                        safeWidth * 0.7,
-                        safeWidth * 0.7 / 60 * 14,
+                        safeWidth * 0.9,
+                        safeWidth * 0.9 / 60 * 14,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6.w),
                       ),
                     ),
-                    icon: Icon(Icons.copy_rounded, size: 6.w),
+                    icon: Icon(Icons.copy_rounded, size: 5.w),
                     label: Text(secretCode,
                         style: TextStyle(
-                          fontSize: safeWidth * 0.08,
+                          fontSize: safeWidth * 0.05,
                         )),
                   )
                 : Column(children: [
@@ -201,8 +201,8 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                       },
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(
-                          safeWidth * 0.7,
-                          safeWidth * 0.7 / 60 * 14,
+                          safeWidth * 0.9,
+                          safeWidth * 0.9 / 60 * 14,
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -219,7 +219,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                           ),
                           child: Text(fakeSecretCode,
                               style: TextStyle(
-                                fontSize: safeWidth * 0.08,
+                                fontSize: safeWidth * 0.05,
                               ))),
                     ),
                     const SizedBox(height: 10),

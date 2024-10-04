@@ -56,29 +56,34 @@ class SecretCodeController extends StateNotifier<String> {
 
     var nums = <int>[];
 
-    final first = (sum + 239) * 157 ~/ 811 % 26;
-    final second = (sum - 661) * 719 * 919 % 26;
-    final third = ((sum ~/ 571) + 353) * 101 % 26;
-    final fourth = ((sum * 409) ~/ 199 + 829) % 26;
-    final fifth = ((sum % 457) * 431 ~/ 67) % 26;
-    final sixth = ((sum ~/ 5) - 307) * 557 % 26;
-    final seventh = pow(sum, 7).toInt() ~/ 181 % 26;
-    final eighth = ((sum * 59 ~/ 71) + 967) % 26;
+    nums = [
+      (sum + 239) * 157 ~/ 811 % 36,
+      (sum - 661) * 719 * 919 % 36,
+      ((sum ~/ 571) + 353) * 101 % 36,
+      ((sum * 409) ~/ 199 + 829) % 36,
+      ((sum % 457) * 431 ~/ 67) % 36,
+      ((sum ~/ 5) - 307) * 557 % 36,
+      pow(sum, 7).toInt() ~/ 181 % 36,
+      ((sum * 59 ~/ 71) + 967) % 36,
 
-    nums.add(first);
-    nums.add(second);
-    nums.add(third);
-    nums.add(fourth);
-    nums.add(fifth);
-    nums.add(sixth);
-    nums.add(seventh);
-    nums.add(eighth);
+      // 9~16
+      (sum + 653) * 139 ~/ 577 % 36,
+      (sum - 877) * 233 * 461 % 36,
+      ((sum ~/ 167) + 283) * 409 % 36,
+      ((sum * 547) ~/ 619 + 233) % 36,
+      ((sum % 701) * 859 ~/ 787) % 36,
+      ((sum ~/ 709) - 151) * 911 % 36,
+      pow(sum, 11).toInt() ~/ 773 % 36,
+      ((sum * 73 ~/ 41) + 383) % 36,
+    ];
 
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    // nums.add(first);
+
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     final code = nums.map((e) => alphabet[e]).join();
 
     // should be XXXX_XXXX
-    final secretCode = '${code.substring(0, 4)}_${code.substring(4)}';
+    final secretCode = '${code.substring(0, 8)}_${code.substring(8)}';
     state = secretCode;
   }
 
