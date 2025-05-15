@@ -2,10 +2,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:html';
 
-const _key = "viewingTimes";
+const _key = "viewingTimes(cookie)";
 const _value = 1;
 
-final viewingTimesProvider = FutureProvider<int>((ref) async {
+final viewingTimesCookieProvider = FutureProvider<int>((ref) async {
   final cookie = document.cookie;
 
   if (cookie == null || cookie.isEmpty) {

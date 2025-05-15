@@ -195,7 +195,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
                         Clipboard.setData(
                             ClipboardData(text: dotenv.get('APP_STORE_LINK')));
                         showToastificationMildError(
-                            context, "Let's Install Zapshot first!",
+                            context, "Please Install Zapshot first!",
                             description: 'to get the secret code');
                         analytics.logEvent(name: 'secret_code_button_invalid');
                       },

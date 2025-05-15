@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sizer/sizer.dart';
 
 import '../helpers/cookies.dart';
+import '../helpers/localStorage.dart';
 import '../helpers/userAgent.dart';
 
 class CheckUserAgentPage extends ConsumerStatefulWidget {
@@ -31,7 +32,9 @@ class CheckUserAgentPageState extends ConsumerState<CheckUserAgentPage> {
     // document.cookie = "key=value";
 
     final isInZapshotWebView = ref.watch(isInZapshotWebViewProvider);
-    final viewingTimes = ref.watch(viewingTimesProvider);
+    final viewingTimesCookie = ref.watch(viewingTimesCookieProvider);
+    final viewingTimesLocalStorage =
+        ref.watch(viewingTimesLocalStorageProvider);
     return Scaffold(
         body: Center(
             child: Padding(
@@ -40,9 +43,22 @@ class CheckUserAgentPageState extends ConsumerState<CheckUserAgentPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    viewingTimes.when(
-                      data: (viewingTimes) => Text(
-                        '👀 Viewing Times: $viewingTimes',
+                    viewingTimesCookie.when(
+                      data: (viewingTimesCookie) => Text(
+                        '🍪 Viewing Times (Cookie): $viewingTimesCookie',
+                        style: TextStyle(fontSize: 10.sp),
+                      ),
+                      loading: () => const CircularProgressIndicator(),
+                      error: (error, stackTrace) => Text('Error: $error'),
+                    ),
+                    Divider(
+                      height: 3.h,
+                      indent: 10.w,
+                      endIndent: 10.w,
+                    ),
+                    viewingTimesLocalStorage.when(
+                      data: (viewingTimesLocalStorage) => Text(
+                        '🛢 Viewing Times (LocalStorage): $viewingTimesLocalStorage',
                         style: TextStyle(fontSize: 10.sp),
                       ),
                       loading: () => const CircularProgressIndicator(),
