@@ -11,8 +11,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 import 'package:sizer/sizer.dart';
 
-import '../helpers/codeGenerator.dart';
+import '../helpers/codeGeneratorOld.dart';
 import '../helpers/firebaseAnalytics.dart';
+import '../helpers/secretCode.dart';
 import '../helpers/toast.dart';
 import '../helpers/urlLauncher.dart';
 import '../helpers/userAgent.dart';
@@ -34,7 +35,9 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
     final remainingSec = ref.watch(remainingSecProvider);
     final isInZapshotWebView = ref.watch(isInZapshotWebViewProvider);
 
+    // final secretCode = ref.watch(secretCodeProvider);
     final secretCode = ref.watch(secretCodeProvider);
+
     final fakeSecretCode = ref.watch(fakeSecretCodeProvider);
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -165,7 +168,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
           ),
           const SizedBox(height: 20 / 2),
           isInZapshotWebView.when(
-            data: (isInZapshot) => isInZapshot
+            data: (isInZapshot) => !isInZapshot
                 ? ElevatedButton.icon(
                     onPressed: () {
                       Clipboard.setData(ClipboardData(

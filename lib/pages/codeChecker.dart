@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:sizer/sizer.dart';
 
-import '../helpers/codeGenerator.dart';
+import '../helpers/codeGeneratorOld.dart';
 
 Page checkIfValidCode(WidgetRef ref, {String? code}) {
-  final ifValid = ref.read(secretCodeProvider.notifier).checkIfValid(code);
+  final ifValid = ref.read(secretCodeOldProvider.notifier).checkIfValid(code);
   if (ifValid) {
     return MaterialPage(
         child: CodeCheckerPage(
@@ -38,7 +38,7 @@ class CodeCheckerPageState extends ConsumerState<CodeCheckerPage> {
         body: Center(
             child: Text(
                 ref
-                    .read(secretCodeProvider.notifier)
+                    .read(secretCodeOldProvider.notifier)
                     .checkIfValid(widget.code!)
                     .toString(),
                 style: TextStyle(fontSize: 15.w))));
