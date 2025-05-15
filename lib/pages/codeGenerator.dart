@@ -168,7 +168,7 @@ class CodeGeneratorPageState extends ConsumerState<CodeGeneratorPage> {
           ),
           const SizedBox(height: 20 / 2),
           isInZapshotWebView.when(
-            data: (isInZapshot) => !isInZapshot
+            data: (isInZapshot) => isInZapshot
                 ? ElevatedButton.icon(
                     onPressed: () {
                       Clipboard.setData(ClipboardData(
