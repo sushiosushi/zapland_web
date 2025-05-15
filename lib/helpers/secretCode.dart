@@ -12,7 +12,7 @@ final secretCodeProvider = StateNotifierProvider<SecretCodeController, String>(
 
 class SecretCodeController extends StateNotifier<String> {
   SecretCodeController() : super('') {
-    loadOrIssueCode();
+    // loadOrIssueCode();
   }
 
   /// localStorage から読み込み、なければ Cloud Functions から取得
